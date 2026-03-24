@@ -8,6 +8,16 @@ public class StrategyDP {
 
     BuildingRoute route2=new BuildingRoute(new CarRoute(),"DEL", "BOM");
     route2.buildRoute();
+
+    // Now client can change algorithm at runtime:
+    BuildingRoute route3 = new BuildingRoute(new WalkRoute(),"KUN","KAS");
+    route3.buildRoute();
+
+    route3.setRouteStrategy(new CarRoute());
+    route3.buildRoute();
+
+    route3.setRouteStrategy(new BicycleRoute());
+    route3.buildRoute();
     }
 }
 class BuildingRoute
@@ -25,6 +35,11 @@ class BuildingRoute
     public void buildRoute()
     {
         routeStrategy.buildRoute(source, destination);
+    }
+
+    public void setRouteStrategy(RouteStrategy routeStrategy)
+    {
+        this.routeStrategy = routeStrategy;
     }
 
 }
